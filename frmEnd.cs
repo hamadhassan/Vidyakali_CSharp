@@ -17,15 +17,21 @@ namespace Vidyakali
             InitializeComponent();
             this.BackgroundImage = img;
         }
-
-        private void btnRestart_Click(object sender, EventArgs e)
+        private void btnStart_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Yes;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult= DialogResult.No;
+            this.DialogResult = DialogResult.No;
+
         }
+
+        private void frmEnd_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

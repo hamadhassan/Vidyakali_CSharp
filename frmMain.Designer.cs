@@ -78,7 +78,7 @@
             this.lblLevel.Name = "lblLevel";
             this.lblLevel.Size = new System.Drawing.Size(34, 25);
             this.lblLevel.TabIndex = 3;
-            this.lblLevel.Text = "01";
+            this.lblLevel.Text = "02";
             // 
             // lblLevelDisplay
             // 
@@ -133,7 +133,6 @@
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
             this.pictureBox5.Location = new System.Drawing.Point(677, 20);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(100, 50);

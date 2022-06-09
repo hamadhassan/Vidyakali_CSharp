@@ -118,43 +118,64 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="bullet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Level2\bullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="attackLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Level1\attackLeft.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EnemyAttackLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="attackRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Level1\attackRight.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="enemyAttackLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Level1\enemyAttackLeft.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EnemyAttackRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="enemyAttackRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Level1\enemyAttackRight.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemyBullet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Level2\enemyBullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EnemyIdel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="enemyIdel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Level1\enemyIdel.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EnemyRunLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="enemyRunLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Level1\enemyRunLeft.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EnemyRunRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="enemyRunRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Level1\enemyRunRight.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="game_background_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\End\game_background_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PlayerAttackLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Level1\attackLeft.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PlayerAttackRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Level1\attackRight.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PlayerIdle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="idle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Level1\idle.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PlayerRunLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="laserEnemy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Level2\laserEnemy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="laserPlayerDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Level2\laserPlayerDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="laserPlayerLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Level2\laserPlayerLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="laserPlayerRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Level2\laserPlayerRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="laserPlayerUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Level2\laserPlayerUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Level2EnemyAttackLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Level2\Level2EnemyAttackLeft.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Level2EnemyAttackRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Level2\Level2EnemyAttackRight.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Level2PlayerAttackLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Level2\Level2PlayerAttackLeft.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Level2PlayerAttackRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Level2\Level2PlayerAttackRight.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="runLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Level1\runLeft.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PlayerRunRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="runRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Level1\runRight.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

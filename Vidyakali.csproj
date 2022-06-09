@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmEnd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEnd.Designer.cs">
+      <DependentUpon>frmEnd.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,6 +63,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmEnd.resx">
+      <DependentUpon>frmEnd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,6 +131,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Level2\enemyBullet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Level2\laserPlayerDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Level2\laserPlayerLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Level2\laserPlayerRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Level2\laserPlayerUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Level2\Level2EnemyAttackLeft.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Level2\Level2EnemyAttackRight.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Level2\Level2PlayerAttackLeft.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Level2\Level2PlayerAttackRight.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

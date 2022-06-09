@@ -63,9 +63,9 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap bullet {
+        internal static System.Drawing.Bitmap attackLeft {
             get {
-                object obj = ResourceManager.GetObject("bullet", resourceCulture);
+                object obj = ResourceManager.GetObject("attackLeft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap EnemyAttackLeft {
+        internal static System.Drawing.Bitmap attackRight {
             get {
-                object obj = ResourceManager.GetObject("EnemyAttackLeft", resourceCulture);
+                object obj = ResourceManager.GetObject("attackRight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap EnemyAttackRight {
+        internal static System.Drawing.Bitmap enemyAttackLeft {
             get {
-                object obj = ResourceManager.GetObject("EnemyAttackRight", resourceCulture);
+                object obj = ResourceManager.GetObject("enemyAttackLeft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap enemyBullet {
+        internal static System.Drawing.Bitmap enemyAttackRight {
             get {
-                object obj = ResourceManager.GetObject("enemyBullet", resourceCulture);
+                object obj = ResourceManager.GetObject("enemyAttackRight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap EnemyIdel {
+        internal static System.Drawing.Bitmap enemyIdel {
             get {
-                object obj = ResourceManager.GetObject("EnemyIdel", resourceCulture);
+                object obj = ResourceManager.GetObject("enemyIdel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap EnemyRunLeft {
+        internal static System.Drawing.Bitmap enemyRunLeft {
             get {
-                object obj = ResourceManager.GetObject("EnemyRunLeft", resourceCulture);
+                object obj = ResourceManager.GetObject("enemyRunLeft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap EnemyRunRight {
+        internal static System.Drawing.Bitmap enemyRunRight {
             get {
-                object obj = ResourceManager.GetObject("EnemyRunRight", resourceCulture);
+                object obj = ResourceManager.GetObject("enemyRunRight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +143,9 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap PlayerAttackLeft {
+        internal static System.Drawing.Bitmap idle {
             get {
-                object obj = ResourceManager.GetObject("PlayerAttackLeft", resourceCulture);
+                object obj = ResourceManager.GetObject("idle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +153,9 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap PlayerAttackRight {
+        internal static System.Drawing.Bitmap laserEnemy {
             get {
-                object obj = ResourceManager.GetObject("PlayerAttackRight", resourceCulture);
+                object obj = ResourceManager.GetObject("laserEnemy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +163,9 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap PlayerIdle {
+        internal static System.Drawing.Bitmap laserPlayerDown {
             get {
-                object obj = ResourceManager.GetObject("PlayerIdle", resourceCulture);
+                object obj = ResourceManager.GetObject("laserPlayerDown", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +173,9 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap PlayerRunLeft {
+        internal static System.Drawing.Bitmap laserPlayerLeft {
             get {
-                object obj = ResourceManager.GetObject("PlayerRunLeft", resourceCulture);
+                object obj = ResourceManager.GetObject("laserPlayerLeft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,9 +183,79 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap PlayerRunRight {
+        internal static System.Drawing.Bitmap laserPlayerRight {
             get {
-                object obj = ResourceManager.GetObject("PlayerRunRight", resourceCulture);
+                object obj = ResourceManager.GetObject("laserPlayerRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap laserPlayerUp {
+            get {
+                object obj = ResourceManager.GetObject("laserPlayerUp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Level2EnemyAttackLeft {
+            get {
+                object obj = ResourceManager.GetObject("Level2EnemyAttackLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Level2EnemyAttackRight {
+            get {
+                object obj = ResourceManager.GetObject("Level2EnemyAttackRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Level2PlayerAttackLeft {
+            get {
+                object obj = ResourceManager.GetObject("Level2PlayerAttackLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Level2PlayerAttackRight {
+            get {
+                object obj = ResourceManager.GetObject("Level2PlayerAttackRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap runLeft {
+            get {
+                object obj = ResourceManager.GetObject("runLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap runRight {
+            get {
+                object obj = ResourceManager.GetObject("runRight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
