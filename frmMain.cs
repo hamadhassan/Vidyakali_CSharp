@@ -13,48 +13,139 @@ namespace Vidyakali
 {
     public partial class frmMain : Form
     {
-        //PictureBox playerIdle;
-        //PictureBox playerRunLeft;
-        //PictureBox playerRunRight;
         PictureBox playerMovement;
-        private int PlayerMovementStatus=0;
+        private int playerSpeed;
         PictureBox enemyIdel;
         Random random;
         private string enemyDirection="left";
         private int enemySpeed=0;
         List<PictureBox> playerFire = new List<PictureBox>();
+        List<PictureBox> enemyFire = new List<PictureBox>();
+        private int enemyFireGenerationTime;
+        private int enemyFireCurrentGeneration;
         public frmMain()
         {
             InitializeComponent();
         }
-        
-        private void gameLoop_Tick(object sender, EventArgs e)
+        private void frmMain_Load(object sender, EventArgs e)
         {
 
-            PlayerMovementStatus = 1;
-            if (Keyboard.IsKeyPressed(Key.LeftArrow))
-            {
-                PlayerMovementStatus = 1;
-                playerMovement.Left -= 10;
-            }
-            if (Keyboard.IsKeyPressed(Key.RightArrow))
-            {
-                PlayerMovementStatus = 2;
-                playerMovement.Left += 10;
-            }
-            if (Keyboard.IsKeyPressed(Key.UpArrow))
-            {
-                playerMovement.Top -= 10;
-            }
-            if (Keyboard.IsKeyPressed(Key.DownArrow))
-            {
-                playerMovement.Top += 10;
-            }
-
+            createPlayer();
+            playerSpeed = 5;
+            random = new Random();
+            enemySpeed = 5;
+            createEnemy();
+            enemyFireGenerationTime = 20;
+            enemyFireCurrentGeneration = 0;
+        }
+        private void gameLoop_Tick(object sender, EventArgs e)
+        {
+            movePlayer();
+            moveEnemy();
+            //Bullets Fire 
             if (Keyboard.IsKeyPressed(Key.Space))
             {
                 createBullet();
             }
+            moveBullet();
+            //detectCollision();
+            removeBullet();
+            enemyFireCurrentGeneration++;
+            if (enemyFireCurrentGeneration == enemyFireGenerationTime)
+            {
+                creatEnemyBullet();
+                enemyFireCurrentGeneration=0;
+            }
+            
+        }
+
+        private void detectCollision()
+        {
+            foreach(PictureBox bullet in playerFire)
+            {
+                if (bullet.Bounds.IntersectsWith(enemyIdel.Bounds))
+                {
+                    enemyIdel.Visible = false ;
+                    bullet.Visible = false; 
+                    enemyFire.Clear();
+                }
+            }
+        }
+
+        private void creatEnemyBullet()
+        {
+            PictureBox bullet = new PictureBox();
+            Image img = Vidyakali.Properties.Resources.enemyBullet;
+            bullet.BackColor = Color.Transparent;
+            bullet.Image = img;
+            bullet.SizeMode = PictureBoxSizeMode.Zoom;
+            bullet.Left = enemyIdel.Left + 40;
+            bullet.Top = enemyIdel.Top;
+            playerFire.Add(bullet);
+            this.Controls.Add(bullet);
+        }
+
+        private void removeBullet()
+        {
+            //Player Fire
+            for(int i = 0; i < playerFire.Count; i++)
+            {
+                if (playerFire[i].Right <= 0)
+                {
+                    playerFire.RemoveAt(i);
+                }
+            }
+            //Enemy Fire 
+            for (int i = 0; i < enemyFire.Count; i++)
+            {
+                if (enemyFire[i].Right <= 0)
+                {
+                    enemyFire.RemoveAt(i);
+                }
+            }
+        }
+
+        private void moveBullet()
+        {
+            //player bullet
+            foreach(PictureBox bullet in playerFire)
+            {
+                bullet.Left+=10;
+            }
+            //enemy bullet
+            foreach(PictureBox bullet in enemyFire)
+            {
+                bullet.Left += 10;
+            }
+        }
+
+        private void movePlayer()
+        {
+            //PLayer Movement 
+            playerMovement.Image = Vidyakali.Properties.Resources.PlayerIdle;
+            if (Keyboard.IsKeyPressed(Key.LeftArrow))
+            {
+                playerMovement.Image = Vidyakali.Properties.Resources.PlayerRunLeft;
+                playerMovement.Left -= playerSpeed;
+            }
+            if (Keyboard.IsKeyPressed(Key.RightArrow))
+            {
+                playerMovement.Image = Vidyakali.Properties.Resources.PlayerRunRight;
+                playerMovement.Left += playerSpeed;
+            }
+            if (Keyboard.IsKeyPressed(Key.UpArrow))
+            {
+                playerMovement.Top -= playerSpeed;
+            }
+            if (Keyboard.IsKeyPressed(Key.DownArrow))
+            {
+                playerMovement.Top += playerSpeed;
+            }
+        }
+
+        private void moveEnemy()
+        {
+            //Enemy Movement
             if (enemyIdel.Left <= 0)
             {
                 enemyDirection = "right";
@@ -63,27 +154,14 @@ namespace Vidyakali
             {
                 enemyDirection = "left";
             }
-
             if (enemyDirection == "left")
             {
-                enemyIdel.Left -= random.Next(0,enemySpeed);
+                enemyIdel.Left -= random.Next(0, enemySpeed);
             }
             if (enemyDirection == "right")
             {
                 enemyIdel.Left += random.Next(0, enemySpeed);
             }
-           
-
-        }
-
-       
-
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-            createPlayer();
-            random = new Random();
-            enemySpeed = 5;
-            createEnemy();
         }
         private void createBullet()
         {
@@ -94,7 +172,7 @@ namespace Vidyakali
             bullet.Image = img;
             bullet.SizeMode = PictureBoxSizeMode.Zoom;
             bullet.Left = playerMovement.Left+40;
-            bullet.Top =playerMovement.Top-10;
+            bullet.Top =playerMovement.Top;
             playerFire.Add(bullet);
             this.Controls.Add(bullet);
         }
@@ -111,43 +189,9 @@ namespace Vidyakali
         }
         private void createPlayer()
         {
-            ////Create Idle player
-            //playerIdle = new PictureBox();
-            //Image img = Vidyakali.Properties.Resources.PlayerIdle;
-            //playerIdle.Image = img;
-            //playerIdle.SizeMode = PictureBoxSizeMode.Zoom;
-            //playerIdle.Left = this.Left;
-            //playerIdle.Top = this.Top;
-            //this.Controls.Add(playerIdle);
-            //Create run left player
-            //playerRunLeft = new PictureBox();
-            //playerRunLeft.Image = Vidyakali.Properties.Resources.PlayerRunLeft;
-            //playerRunLeft.SizeMode = PictureBoxSizeMode.Zoom;
-            //playerRunLeft.Left = this.Left;
-            //playerRunLeft.Top = this.Top;
-            //this.Controls.Add(playerRunLeft);
-            ////Create run Right player
-            //playerRunRight = new PictureBox();
-            //playerRunRight.Image = Vidyakali.Properties.Resources.PlayerRunRight;
-            //playerRunRight.SizeMode = PictureBoxSizeMode.Zoom;
-            //playerRunRight.Left = this.Left;
-            //playerRunRight.Top = this.Top;
-            //this.Controls.Add(playerRunRight);
-            //Create player Movement
+            //Create player Movement idle,left and right
             playerMovement = new PictureBox();
-            if (PlayerMovementStatus == 0)
-            {//player idle
-                playerMovement.BackColor = Color.Transparent;
-                playerMovement.Image = Vidyakali.Properties.Resources.PlayerAttackLeft;
-            }
-            else if (PlayerMovementStatus == 1)
-            {//player  run left  
-                playerMovement.Image = Vidyakali.Properties.Resources.PlayerRunLeft;
-            }
-            else if (PlayerMovementStatus == 2)
-            {// player run right  
-                playerMovement.Image = Vidyakali.Properties.Resources.PlayerRunRight;
-            }
+            playerMovement.Image = Vidyakali.Properties.Resources.PlayerIdle;
             playerMovement.SizeMode = PictureBoxSizeMode.Zoom;
             playerMovement.Left = this.Left;
             playerMovement.Top = this.Top;

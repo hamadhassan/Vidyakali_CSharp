@@ -120,5 +120,8 @@
   <ItemGroup>
     <None Include="Assets\attack.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Level2\enemyBullet.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

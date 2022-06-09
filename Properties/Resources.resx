@@ -127,6 +127,9 @@
   <data name="EnemyAttackRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Level1\enemyAttackRight.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="enemyBullet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Level2\enemyBullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="EnemyIdel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Level1\enemyIdel.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -135,6 +138,9 @@
   </data>
   <data name="EnemyRunRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Level1\enemyRunRight.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="game_background_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\End\game_background_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PlayerAttackLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Level1\attackLeft.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
