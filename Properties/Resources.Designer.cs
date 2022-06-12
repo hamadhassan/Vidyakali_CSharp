@@ -83,6 +83,16 @@ namespace Vidyakali.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap boxOpen {
+            get {
+                object obj = ResourceManager.GetObject("boxOpen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap enemyAttackLeft {
             get {
                 object obj = ResourceManager.GetObject("enemyAttackLeft", resourceCulture);
@@ -126,6 +136,16 @@ namespace Vidyakali.Properties {
         internal static System.Drawing.Bitmap enemyRunRight {
             get {
                 object obj = ResourceManager.GetObject("enemyRunRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap energy {
+            get {
+                object obj = ResourceManager.GetObject("energy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -156,5 +156,11 @@
   <ItemGroup>
     <None Include="Assets\Level2\Level2PlayerAttackRight.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Level1\boxOpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Level1\energy.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
