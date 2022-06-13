@@ -230,8 +230,6 @@
             this.pictureBox192 = new System.Windows.Forms.PictureBox();
             this.pictureBox193 = new System.Windows.Forms.PictureBox();
             this.pictureBox194 = new System.Windows.Forms.PictureBox();
-            this.lblCheck = new System.Windows.Forms.Label();
-            this.lblRemoveCheck = new System.Windows.Forms.Label();
             this.pictureBox195 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -2471,24 +2469,6 @@
             this.pictureBox194.TabIndex = 6;
             this.pictureBox194.TabStop = false;
             // 
-            // lblCheck
-            // 
-            this.lblCheck.AutoSize = true;
-            this.lblCheck.Location = new System.Drawing.Point(639, 68);
-            this.lblCheck.Name = "lblCheck";
-            this.lblCheck.Size = new System.Drawing.Size(51, 20);
-            this.lblCheck.TabIndex = 9;
-            this.lblCheck.Text = "label1";
-            // 
-            // lblRemoveCheck
-            // 
-            this.lblRemoveCheck.AutoSize = true;
-            this.lblRemoveCheck.Location = new System.Drawing.Point(709, 68);
-            this.lblRemoveCheck.Name = "lblRemoveCheck";
-            this.lblRemoveCheck.Size = new System.Drawing.Size(68, 20);
-            this.lblRemoveCheck.TabIndex = 9;
-            this.lblRemoveCheck.Text = "Remove";
-            // 
             // pictureBox195
             // 
             this.pictureBox195.Location = new System.Drawing.Point(-23, -46);
@@ -2501,11 +2481,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.ClientSize = new System.Drawing.Size(801, 494);
             this.Controls.Add(this.pictureBox195);
-            this.Controls.Add(this.lblRemoveCheck);
-            this.Controls.Add(this.lblCheck);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox80);
@@ -2708,10 +2686,11 @@
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Game";
+            this.Text = "Vidyakali";
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
@@ -3114,8 +3093,6 @@
         private System.Windows.Forms.PictureBox pictureBox192;
         private System.Windows.Forms.PictureBox pictureBox193;
         private System.Windows.Forms.PictureBox pictureBox194;
-        private System.Windows.Forms.Label lblCheck;
-        private System.Windows.Forms.Label lblRemoveCheck;
         private System.Windows.Forms.PictureBox pictureBox195;
     }
 }

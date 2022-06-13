@@ -27,3 +27,4 @@ D:\COMPUTER SCIENCE\PD\GitHub Local Repositories\Vidyakali\Vidyakali_CSharp\obj\
 D:\COMPUTER SCIENCE\PD\GitHub Local Repositories\Vidyakali\Vidyakali_CSharp\obj\Debug\Vidyakali.exe
 D:\COMPUTER SCIENCE\PD\GitHub Local Repositories\Vidyakali\Vidyakali_CSharp\obj\Debug\Vidyakali.pdb
 D:\COMPUTER SCIENCE\PD\GitHub Local Repositories\Vidyakali\Vidyakali_CSharp\obj\Debug\Vidyakali.frmEnd.resources
+D:\COMPUTER SCIENCE\PD\GitHub Local Repositories\Vidyakali\Vidyakali_CSharp\obj\Debug\Vidyakali.frmHome.resources

@@ -13,6 +13,7 @@ namespace Vidyakali
 {
     public partial class frmMain : Form
     {
+        #region All Level
         private int levelNumberStatus;
         private float score;
         private bool gameStatus=true;
@@ -25,11 +26,13 @@ namespace Vidyakali
         ProgressBar playerHealth;
         PictureBox playerMovement;
         Random random= new Random();
+        #endregion
         #region Level1
         PictureBox enemyIdelMovement;
         ProgressBar enemyIdelHealth;
         private int enemyIdelSpeed;
         #endregion
+
         #region Level 2
         PictureBox enemyRunMovement;
         ProgressBar enemyRunlHealth;
@@ -38,11 +41,14 @@ namespace Vidyakali
         private int fixedEnegyTime;
         private int energyTime;
         #endregion
+
         #region Level3 
         private int playerBulletSpeed;
-        PictureBox enemyIdel;
+        PictureBox enemyFire;
         private string enemyDirection = "left";
         private int enemySpeed = 0;
+        List<PictureBox> enemyIdelList = new List<PictureBox>();
+        private int enemeyIdelListSpeed;
         List<PictureBox> playerFireRight = new List<PictureBox>();
         List<PictureBox> playerFireLeft = new List<PictureBox>();
         List<PictureBox> playerFireUp = new List<PictureBox>();
@@ -50,7 +56,12 @@ namespace Vidyakali
         List<PictureBox> enemyFireList=new List<PictureBox>();
         private int enemyFireGenerationTime;
         private int enemyFireCurrentGeneration;
+        private int reducePlayerHealth;
+        private int countDiedEnemy;
+
         #endregion
+
+        #region Form Setup 
         public frmMain()
         {
             InitializeComponent();
@@ -60,17 +71,17 @@ namespace Vidyakali
             startLevel1();
             createnextLevel();
             nextLevelBox.Visible = false;
-            
         }
+        #endregion
+
+        #region Game Loop
         private void gameLoop_Tick(object sender, EventArgs e)
         {
             if (gameStatus == true)
             {
                 lblLevel.Text = levelNumberStatus.ToString();
                 lblScore.Text = score.ToString();
-                gameOver();
                 movePlayer();
-              
                 if (isLevel1 == true)
                 {
                     moveEnemyIdel();
@@ -78,10 +89,14 @@ namespace Vidyakali
                     detectCollisionwithEnemyIdel();
                     detectCollisionOfEnemyIdelWithPlayerL1();
                     detectBoxCollisionL1();
+                    gameOver();
+                    //energyPoint
+                    showEnergyPoint();
+                    detectCollisionOfEnergyPoint();
+                    removeEnergyPoint();
                 }
                 else if (isLevel2 == true)
                 {
-                    //pgbarPlayerLife.Value = 100;
                     playerAttackByHand();
                     moveEnemyIdel();
                     detectCollisionwithEnemyIdel();
@@ -91,6 +106,7 @@ namespace Vidyakali
                     detectCollisionOfEnemyRunWithPlayer();
                     nexLevel();
                     detectBoxCollisionL2();
+                    gameOver();
                     //energyPoint
                     showEnergyPoint();
                     detectCollisionOfEnergyPoint();
@@ -111,10 +127,12 @@ namespace Vidyakali
                     moveEnemy();
                     moveEnemyBullet();
                     removeEnemyBullet();
-                    detectCollisionRight();
-                    detectCollisionLeft();
-                    detectCollisionUp();
-                    detectCollisionDown();
+                    detectEnemyFireCollision();
+                    detectEnemyCollision();
+                    detectPlayerCollisionRight();
+                    detectPlayerCollisionLeft();
+                    detectPlayerCollisionUp();
+                    detectPlayerCollisionDown();
                     enemyFireCurrentGeneration++;
                     if (enemyFireCurrentGeneration == enemyFireGenerationTime)
                     {
@@ -125,20 +143,50 @@ namespace Vidyakali
                     showEnergyPoint();
                     detectCollisionOfEnergyPoint();
                     removeEnergyPoint();
+                    //Randon Enemy
+                    genertaeEneyIdel();
+                    moveEnemyIdelList();
+                    removeEnemyFromList();
+                    detectCollisionofEnemyIdelList();
+                    detectEnemyCollisionwithPlayer();
+                    gameOver();
+                    nexLevel();
+                    detectBoxCollisionL3();
                 }
             }
             else
             {
-                gameLoop.Enabled = false; 
-                MessageBox.Show("game over");
-               // Application.Exit();
+                gameLoop.Enabled = false;
+                string message = "Game Over";
+                frmEnd end = new frmEnd(message);
+                DialogResult result = end.ShowDialog();
+                if (result == DialogResult.Yes)
+                {
+                    restartLevel1();
+                }
+                else
+                {
+                    Close();
+                }
             }
-
         }
-       
+        #endregion
+
         #region Level1
         private void startLevel1()
         {
+            score = 0;
+            levelNumberStatus = 1;
+            playerSpeed = 10;
+            enemyIdelSpeed = 1;
+            pgbarPlayerLife.Value = 100;
+            createEnemyIdel();
+            createPlayer();
+            boxOpeningLevel = 1;
+        }
+        private void restartLevel1()
+        {
+            //gameLoop.Enabled = true;
             score = 0;
             levelNumberStatus = 1;
             playerSpeed = 10;
@@ -161,13 +209,12 @@ namespace Vidyakali
         }
         private void detectCollisionOfEnemyIdelWithPlayerL1()
         {
-            if (enemyIdelMovement.Bounds.IntersectsWith(playerMovement.Bounds))
+            if (enemyIdelMovement.Bounds.IntersectsWith(playerMovement.Bounds) && Keyboard.IsKeyPressed(Key.D) || Keyboard.IsKeyPressed(Key.A))
             {
                 score += 0.5F;
                 if (enemyIdelHealth.Value > 0)
                 {
                     enemyIdelHealth.Value -= 1;
-                    lblRemoveCheck.Text = enemyIdelHealth.Value.ToString();
                 }
                 if (enemyIdelHealth.Value <= 0)
                 {//level 1 won 
@@ -291,6 +338,21 @@ namespace Vidyakali
         #endregion
 
         #region Level 2
+        private void startLevel2()
+        {
+            createEnemyRun();
+            createEnemyIdel();
+            enemyRunlHealth.Value = 100;
+            levelNumberStatus = 2;
+            playerSpeed = 10;
+            enemyIdelSpeed = 1;
+            enemyRunSpeed = 3;
+            pgbarPlayerLife.Value = 100;
+            enemyIdelHealth.Value = 100;
+            enemyIdelMovement.Visible = true;
+            enemyIdelHealth.Visible = true;
+            this.BackColor = Color.DarkSlateGray;
+        }
         private void showEnergyPoint()
         {
             energyTime++;
@@ -321,7 +383,7 @@ namespace Vidyakali
                 if (energy.Bounds.IntersectsWith(playerMovement.Bounds))
                 {
                     energy.Visible = false;
-                    if (pgbarPlayerLife.Value < 86)
+                    if (pgbarPlayerLife.Value < 80)
                     {
                         pgbarPlayerLife.Value +=17;
                     }
@@ -340,29 +402,15 @@ namespace Vidyakali
             energyPointList.Add(enegy);
             this.Controls.Add(enegy);
         }
-        private void startLevel2()
-        {
-            createEnemyRun();
-            createEnemyIdel();
-            enemyRunlHealth.Value = 100;
-            levelNumberStatus = 2;
-            playerSpeed = 10;
-            enemyIdelSpeed =1;
-            enemyRunSpeed = 3;
-            pgbarPlayerLife.Value = 100;
-            enemyIdelHealth.Value = 100;
-            enemyIdelMovement.Visible = true;
-            enemyIdelHealth.Visible = true;
-        }
+      
         private void detectCollisionOfEnemyIdelWithPlayerL2()
         {
-            if (enemyIdelMovement.Bounds.IntersectsWith(playerMovement.Bounds))
+            if (enemyIdelMovement.Bounds.IntersectsWith(playerMovement.Bounds) && Keyboard.IsKeyPressed(Key.D) || Keyboard.IsKeyPressed(Key.A))
             {
                 score += 0.5F;
                 if (enemyIdelHealth.Value > 0)
                 {
                     enemyIdelHealth.Value -= 1;
-                    lblRemoveCheck.Text = enemyIdelHealth.Value.ToString();
                 }
                 if (enemyIdelHealth.Value <= 0)
                 {//level 2 idel enemy remove  
@@ -379,7 +427,6 @@ namespace Vidyakali
                 if (enemyRunlHealth.Value > 0)
                 {
                     enemyRunlHealth.Value -= 1;
-                    lblCheck.Text = enemyRunlHealth.Value.ToString();
                 }
                 if (enemyRunlHealth.Value <= 0)
                 {//level 2 run enemy remove 
@@ -450,49 +497,89 @@ namespace Vidyakali
             enemyFireGenerationTime = 20;
             enemyFireCurrentGeneration = 0;
             playerHealth.Value = 100;
+            reducePlayerHealth = 1;
+            enemeyIdelListSpeed = 3;
             createEnemy();
+            this.BackColor = Color.Silver;
         }
-        private void detectCollisionRight()
+       
+        private void detectPlayerCollisionRight()
         {
             foreach (PictureBox bullet in playerFireRight)
             {
-                if (bullet.Bounds.IntersectsWith(enemyIdel.Bounds))
+                foreach(PictureBox enemy in enemyIdelList)
                 {
-                    enemyIdel.Visible = false;
+                    if (bullet.Bounds.IntersectsWith(enemy.Bounds))
+                    {
+                        enemy.Visible = false;
+                        score += 0.5F;
+                    }
+                }
+                if (bullet.Bounds.IntersectsWith(enemyFire.Bounds))
+                {
+                    enemyFire.Visible = false;
                     enemyFireGenerationTime = -1;
+                    score += 0.5F;
                 }
             }
         }
-        private void detectCollisionLeft()
+        private void detectPlayerCollisionLeft()
         {
             foreach (PictureBox bullet in playerFireLeft)
             {
-                if (bullet.Bounds.IntersectsWith(enemyIdel.Bounds))
+                foreach (PictureBox enemy in enemyIdelList)
                 {
-                    enemyIdel.Visible = false;
+                    if (bullet.Bounds.IntersectsWith(enemy.Bounds))
+                    {
+                        enemy.Visible = false;
+                        score += 0.5F;
+                    }
+                }
+                if (bullet.Bounds.IntersectsWith(enemyFire.Bounds))
+                {
+                    enemyFire.Visible = false;
                     enemyFireGenerationTime = -1;
+                    score += 0.5F;
                 }
             }
         }
-        private void detectCollisionUp()
+        private void detectPlayerCollisionUp()
         {
             foreach (PictureBox bullet in playerFireUp)
             {
-                if (bullet.Bounds.IntersectsWith(enemyIdel.Bounds))
+                foreach (PictureBox enemy in enemyIdelList)
                 {
-                    enemyIdel.Visible = false;
+                    if (bullet.Bounds.IntersectsWith(enemy.Bounds))
+                    {
+                        enemy.Visible = false;
+                        score += 0.5F;
+                    }
+                }
+                if (bullet.Bounds.IntersectsWith(enemyFire.Bounds))
+                {
+                    enemyFire.Visible = false;
                     enemyFireGenerationTime = -1;
+                    score += 0.5F;
                 }
             }
         }
-        private void detectCollisionDown()
+        private void detectPlayerCollisionDown()
         {
             foreach (PictureBox bullet in playerFireDown)
             {
-                if (bullet.Bounds.IntersectsWith(enemyIdel.Bounds))
+                foreach (PictureBox enemy in enemyIdelList)
                 {
-                    enemyIdel.Visible = false;
+                    if (bullet.Bounds.IntersectsWith(enemy.Bounds))
+                    {
+                        enemy.Visible = false;
+                        score += 0.5F;
+                    }
+                }
+                if (bullet.Bounds.IntersectsWith(enemyFire.Bounds))
+                {
+                    enemyFire.Visible = false;
                     enemyFireGenerationTime = -1;
+                    score += 0.5F;
                 }
             }
         }
@@ -635,6 +722,30 @@ namespace Vidyakali
             playerFireRight.Add(bullet);
             this.Controls.Add(bullet);
         }
+        private void detectEnemyFireCollision()
+        {
+            foreach (PictureBox bullet in enemyFireList)
+            {
+                if (bullet.Bounds.IntersectsWith(playerMovement.Bounds))
+                {
+                    if (playerHealth.Value > reducePlayerHealth)
+                    {
+                        playerHealth.Value -= reducePlayerHealth;
+                    }
+                }
+            }
+        }
+        private void detectEnemyCollision()
+        {
+            if (enemyFire.Bounds.IntersectsWith(playerMovement.Bounds))
+            {
+                if (playerHealth.Value > reducePlayerHealth)
+                {
+                    playerHealth.Value -= reducePlayerHealth;
+                }
+               
+            }
+        }
         private void moveEnemyBullet()
         {
             //enemy bullet
@@ -662,110 +773,169 @@ namespace Vidyakali
             bullet.BackColor = Color.Transparent;
             bullet.Image = img;
             bullet.SizeMode = PictureBoxSizeMode.AutoSize;
-            bullet.Left = enemyIdel.Left;
-            bullet.Top = enemyIdel.Top + 40;
+            bullet.Left = enemyFire.Left;
+            bullet.Top = enemyFire.Top + 40;
             enemyFireList.Add(bullet);
             this.Controls.Add(bullet);
 
         }
-        //private void movePlayer()
-        //{
-            ////PLayer Movement 
-            //playerMovement.Image = Vidyakali.Properties.Resources.idle;
-            //if (Keyboard.IsKeyPressed(Key.LeftArrow))
-            //{
-            //    playerMovement.Image = Vidyakali.Properties.Resources.runLeft;
-            //    playerMovement.Left -= playerSpeed;
-            //}
-            //if (Keyboard.IsKeyPressed(Key.RightArrow))
-            //{
-            //    playerMovement.Image = Vidyakali.Properties.Resources.runRight;
-            //    playerMovement.Left += playerSpeed;
-            //}
-            //if (Keyboard.IsKeyPressed(Key.UpArrow))
-            //{
-            //    playerMovement.Top -= playerSpeed;
-            //}
-            //if (Keyboard.IsKeyPressed(Key.DownArrow))
-            //{
-            //    playerMovement.Top += playerSpeed;
-            //}
-        //}
-
         private void moveEnemy()
         {
             //Enemy Movement
-            if (enemyIdel.Left <= 0)
+            if (enemyFire.Left <= 0)
             {
                 enemyDirection = "right";
             }
-            if (enemyIdel.Left + enemyIdel.Width >= this.Width)
+            if (enemyFire.Left + enemyFire.Width >= this.Width)
             {
                 enemyDirection = "left";
             }
             if (enemyDirection == "left")
             {
-                enemyIdel.Left -= random.Next(0, enemySpeed);
+                enemyFire.Left -= random.Next(0, enemySpeed);
             }
             if (enemyDirection == "right")
             {
-                enemyIdel.Left += random.Next(0, enemySpeed);
+                enemyFire.Left += random.Next(0, enemySpeed);
             }
         }
-        private void createEnemy()
+        private void detectEnemyCollisionwithPlayer()
         {
-            enemyIdel = new PictureBox();
+            foreach(PictureBox enemy in enemyIdelList)
+            {
+                if (enemy.Bounds.IntersectsWith(playerMovement.Bounds))
+                {
+                    if (playerHealth.Value > reducePlayerHealth)
+                    {
+                        playerHealth.Value -= reducePlayerHealth;
+                    }
+                }
+            }
+           
+        }
+        private void detectCollisionofEnemyIdelList()
+        {
+            foreach (PictureBox enemy in enemyIdelList)
+            { 
+                foreach(PictureBox right in playerFireRight)
+                {
+                    if (enemy.Bounds.IntersectsWith(right.Bounds))
+                    {
+                        if (playerHealth.Value > reducePlayerHealth)
+                        {
+                            playerHealth.Value -= reducePlayerHealth;
+                        }
+                    }
+                }
+                foreach (PictureBox left in playerFireLeft)
+                {
+                    if (enemy.Bounds.IntersectsWith(left.Bounds))
+                    {
+                        if (playerHealth.Value > reducePlayerHealth)
+                        {
+                            playerHealth.Value -= reducePlayerHealth;
+                        }
+                    }
+                }
+                foreach (PictureBox up in playerFireUp)
+                {
+                    if (enemy.Bounds.IntersectsWith(up.Bounds))
+                    {
+                        if (playerHealth.Value > reducePlayerHealth)
+                        {
+                            playerHealth.Value -= reducePlayerHealth;
+                        }
+                    }
+                }
+                foreach (PictureBox down in playerFireDown)
+                {
+                    if (enemy.Bounds.IntersectsWith(down.Bounds))
+                    {
+                        if (playerHealth.Value > reducePlayerHealth)
+                        {
+                            playerHealth.Value -= reducePlayerHealth;
+                        }
+                    }
+                }
+
+            }
+        }
+        private void removeEnemyFromList()
+        {
+            for(int x = 0; x < enemyIdelList.Count; x++)
+            {
+                if (enemyIdelList[x].Visible == false)
+                {
+                    enemyIdelList.RemoveAt(x);
+                    countDiedEnemy++;
+                }
+            }
+        }
+        private void moveEnemyIdelList()
+        {
+            foreach (PictureBox enemy in enemyIdelList )
+            {
+                if (enemy.Visible != false)
+                {
+                    if (enemy.Left > playerMovement.Left)
+                    {
+                        enemy.Left -= enemeyIdelListSpeed;
+                    }
+                    if (enemy.Left < playerMovement.Left)
+                    {
+                        enemy.Left += enemeyIdelListSpeed;
+                    }
+                    if (enemy.Top > playerMovement.Top)
+                    {
+                        enemy.Top -= enemeyIdelListSpeed;
+                    }
+                    if (enemy.Top < playerMovement.Top)
+                    {
+                        enemy.Top += enemeyIdelListSpeed;
+                    }
+                }
+            }
+        }
+        private void genertaeEneyIdel()
+        {
+            if (enemyIdelList.Count < 2)
+            {
+                creatEnemyIdel();
+            }
+        }
+        private void creatEnemyIdel()
+        {
+            PictureBox enemyidel = new PictureBox();
             Image img = Vidyakali.Properties.Resources.enemyIdel;
-            enemyIdel.Image = img;
-            enemyIdel.SizeMode = PictureBoxSizeMode.AutoSize;
-            enemyIdel.Top = random.Next(100, 200);
-            enemyIdel.Left = random.Next(100, this.Width - img.Width);
-            this.Controls.Add(enemyIdel);
-            enemyDirection = "left";
+            enemyidel.Image = img;
+            enemyidel.SizeMode = PictureBoxSizeMode.AutoSize;
+            enemyidel.Top = random.Next(10, 300);
+            enemyidel.Left = random.Next(10, 300);
+            this.Controls.Add(enemyidel);
+            enemyIdelList.Add(enemyidel);
+            //Bullet
+            PictureBox bullet = new PictureBox();
+            Image img1 = Vidyakali.Properties.Resources.laserEnemy;
+            bullet.BackColor = Color.Transparent;
+            bullet.Image = img1;
+            bullet.SizeMode = PictureBoxSizeMode.AutoSize;
+            bullet.Left = enemyidel.Left;
+            bullet.Top = enemyidel.Top + 40;
+            enemyFireList.Add(bullet);
+            this.Controls.Add(bullet);
         }
 
-        //private void createPlayer()
-        //{
-        //    //Create player Movement idle,left and right
-        //    //progress bar
-        //    playerHealth = new ProgressBar();
-        //    playerHealth.Value = 100;
-        //    playerHealth.Top = playerMovement.Top + 72;
-        //    playerHealth.Left = playerMovement.Left;
-        //    playerHealth.Size = new Size(60, 15);
-        //    this.Controls.Add(playerHealth);
-        //}
-        //if (enemyIdel.Visible == false)
-        //{
-        //    gameLoop.Enabled = false;
-        //    Image img = Vidyakali.Properties.Resources.game_background_4;
-        //    frmEnd end = new frmEnd(img);
-        //    DialogResult result = end.ShowDialog();
-        //    if (result == DialogResult.Yes)
-        //    {
-        //        StartLevel2();
-        //    }
-        //    else
-        //    {
-        //        Close();
-        //    }
-        //}
-        //else if (playerHealth.Value == 0)
-        //{
-        //    gameLoop.Enabled = false;
-        //    Image img = Vidyakali.Properties.Resources.game_background_4;
-        //    frmEnd end = new frmEnd(img);
-        //    DialogResult result = end.ShowDialog();
-        //    if (result == DialogResult.Yes)
-        //    {
-        //        StartLevel2();
-        //    }
-        //    else
-        //    {
-        //        Close();
-        //    }
-        //}
-
+        private void createEnemy()
+        {
+            enemyFire = new PictureBox();
+            Image img = Vidyakali.Properties.Resources.enemyIdel;
+            enemyFire.Image = img;
+            enemyFire.SizeMode = PictureBoxSizeMode.AutoSize;
+            enemyFire.Top = random.Next(100, 200);
+            enemyFire.Left = random.Next(100, this.Width - img.Width);
+            this.Controls.Add(enemyFire);
+            enemyDirection = "left";
+        }
         #endregion
 
         #region Next Level 
@@ -778,18 +948,24 @@ namespace Vidyakali
                 boxOpeningLevel = 3;
                 isLevel2 = false;
             }
+            if (countDiedEnemy == 10)
+            {
+                nextLevelBox.Visible = true;
+                boxOpeningLevel = 4;
+                isLevel3 = false;
+            }
         }
         private void gameOver()
         {
-            if (playerHealth.Value <= 0)
-            {//level 1 lost
+            if (playerHealth.Value <= 2)
+            {
                 if (pgbarPlayerLife.Value > 0)
                 {
                     pgbarPlayerLife.Value -= 33;
-                    playerHealth.Value = 100;
                 }
+                playerHealth.Value = 100;
             }
-            else if (pgbarPlayerLife.Value <= 1)
+            if (pgbarPlayerLife.Value <= 1)
             {
                 this.Controls.Remove(playerMovement);
                 this.Controls.Remove(playerHealth);
@@ -825,6 +1001,30 @@ namespace Vidyakali
                 }
             }
         }
+        private void detectBoxCollisionL3()
+        {
+            if (boxOpeningLevel == 4) //4 mean won 
+            {
+                isLevel3 = true;
+                if (playerMovement.Bounds.IntersectsWith(nextLevelBox.Bounds))
+                {
+                    nextLevelBox.Visible = false;
+                    isLevel3 = false;
+                    gameLoop.Enabled = false;
+                    string message = "You Won";
+                    frmEnd end = new frmEnd(message);
+                    DialogResult result = end.ShowDialog();
+                    if (result == DialogResult.Yes)
+                    {
+                        restartLevel1();
+                    }
+                    else
+                    {
+                        Close();
+                    }
+                }
+            }
+        }
         private void createnextLevel()
         {
             nextLevelBox = new PictureBox();
@@ -835,7 +1035,5 @@ namespace Vidyakali
             this.Controls.Add(nextLevelBox);
         }
         #endregion
-
     }
 }
-

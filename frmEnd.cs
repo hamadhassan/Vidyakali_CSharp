@@ -12,10 +12,10 @@ namespace Vidyakali
 {
     public partial class frmEnd : Form
     {
-        public frmEnd(Image img)
+        public frmEnd(string message)
         {
             InitializeComponent();
-            this.BackgroundImage = img;
+            lblMessage.Text = message;
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -25,13 +25,6 @@ namespace Vidyakali
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.No;
-
         }
-
-        private void frmEnd_Load(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
