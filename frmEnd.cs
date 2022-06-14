@@ -14,17 +14,38 @@ namespace Vidyakali
     {
         public frmEnd(string message)
         {
-            InitializeComponent();
-            lblMessage.Text = message;
+            try
+            {
+                InitializeComponent();
+                lblMessage.Text = message;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Yes;
+            try
+            {
+                this.DialogResult = DialogResult.Yes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.No;
+            try
+            {
+                this.DialogResult = DialogResult.No;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

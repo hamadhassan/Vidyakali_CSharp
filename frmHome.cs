@@ -16,12 +16,19 @@ namespace Vidyakali
         {
             InitializeComponent();
         }
-
         private void btnStart_Click(object sender, EventArgs e)
         {
-            frmMain frmMain = new frmMain();
-            frmMain.Show();
-            Hide();
+            try
+            {
+                frmMain frmMain = new frmMain();
+                frmMain.Show();
+                Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
     }
 }
