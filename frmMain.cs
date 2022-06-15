@@ -26,6 +26,9 @@ namespace Vidyakali
         ProgressBar playerHealth;
         PictureBox playerMovement;
         Random random= new Random();
+        List<PictureBox> energyPointList = new List<PictureBox>();
+        private int fixedEnegyTime;
+        private int energyTime;
         #endregion
 
         #region Level1
@@ -38,16 +41,13 @@ namespace Vidyakali
         PictureBox enemyRunMovement;
         ProgressBar enemyRunlHealth;
         private int enemyRunSpeed;
-        List<PictureBox> energyPointList = new List<PictureBox>();
-        private int fixedEnegyTime;
-        private int energyTime;
         #endregion
 
         #region Level3 
         private int playerBulletSpeed;
         PictureBox enemyFire;
         private string enemyDirection = "left";
-        private int enemySpeed = 0;
+        private int enemySpeed;
         List<PictureBox> enemyIdelList = new List<PictureBox>();
         private int enemeyIdelListSpeed;
         List<PictureBox> playerFireRight = new List<PictureBox>();
@@ -62,6 +62,7 @@ namespace Vidyakali
 
         #endregion
 
+      
         #region Form Setup 
         public frmMain()
         {
@@ -114,7 +115,7 @@ namespace Vidyakali
                         moveRunEnemy();
                         detectCollisionwithEnemyRun();
                         detectCollisionOfEnemyRunWithPlayer();
-                        nexLevel();
+                        nexLevel3();
                         detectBoxCollisionL2();
                         gameOver();
                         //energyPoint
@@ -149,19 +150,19 @@ namespace Vidyakali
                             creatEnemyBullet();
                             enemyFireCurrentGeneration = 0;
                         }
-                        //energyPoint
-                        showEnergyPoint();
-                        detectCollisionOfEnergyPoint();
-                        removeEnergyPoint();
                         //Randon Enemy
                         genertaeEneyIdel();
                         moveEnemyIdelList();
                         removeEnemyFromList();
                         detectCollisionofEnemyIdelList();
                         detectEnemyCollisionwithPlayer();
-                        gameOver();
-                        nexLevel();
+                        winningCodition();
                         detectBoxCollisionL3();
+                        gameOver();
+                        //energyPoint
+                        showEnergyPoint();
+                        detectCollisionOfEnergyPoint();
+                        removeEnergyPoint();
                     }
                 }
                 else
@@ -195,11 +196,12 @@ namespace Vidyakali
                 score = 0;
                 levelNumberStatus = 1;
                 playerSpeed = 10;
-                enemyIdelSpeed = 1;
+                enemyIdelSpeed = 3;
                 pgbarPlayerLife.Value = 100;
                 createEnemyIdel();
                 createPlayer();
                 boxOpeningLevel = 1;
+                this.BackColor = Color.DarkOliveGreen;
             }
             catch (Exception ex)
             {
@@ -207,19 +209,70 @@ namespace Vidyakali
             }
            
         }
+        private void clearProgressBoxObject()
+        {
+
+            this.Controls.Remove(enemyIdelHealth);
+            this.Controls.Remove(playerHealth);
+            this.Controls.Remove(enemyRunlHealth);
+        }
+        private void clearPictureBoxObject()
+        {
+            this.Controls.Remove(enemyIdelMovement);
+            this.Controls.Remove(playerMovement);
+            this.Controls.Remove(nextLevelBox);
+            this.Controls.Remove(enemyRunMovement);
+            this.Controls.Remove(enemyFire);
+            for (int i = 0; i < energyPointList.Count; i++)
+            {
+                this.Controls.RemoveAt(i);
+            }
+            for (int i = 0; i < enemyIdelList.Count; i++)
+            {
+                this.Controls.RemoveAt(i);
+            }
+            for (int i = 0; i < playerFireRight.Count; i++)
+            {
+                this.Controls.RemoveAt(i);
+            }
+            for (int i = 0; i < playerFireLeft.Count; i++)
+            {
+                this.Controls.RemoveAt(i);
+            }
+            for (int i = 0; i < playerFireUp.Count; i++)
+            {
+                this.Controls.RemoveAt(i);
+            }
+            for (int i = 0; i < playerFireDown.Count; i++)
+            {
+                this.Controls.RemoveAt(i);
+            }
+            for (int i = 0; i < enemyFireList.Count; i++)
+            {
+                this.Controls.RemoveAt(i);
+            }
+            //energyPointList = new List<PictureBox>();
+            //enemyIdelList = new List<PictureBox>();
+            //playerFireRight = new List<PictureBox>();
+            //playerFireLeft = new List<PictureBox>();
+            //playerFireUp = new List<PictureBox>();
+            //playerFireDown = new List<PictureBox>();
+            //enemyFireList = new List<PictureBox>();
+        }
         private void restartLevel1()
         {
             try
             {
-                //gameLoop.Enabled = true;
-                score = 0;
-                levelNumberStatus = 1;
-                playerSpeed = 10;
-                enemyIdelSpeed = 1;
-                pgbarPlayerLife.Value = 100;
-                createEnemyIdel();
-                createPlayer();
-                boxOpeningLevel = 1;
+                gameStatus = true;
+                isLevel1 = true;
+                isLevel2 = false;
+                isLevel3 = false;
+                enemyDirection = "left";
+                clearProgressBoxObject();
+                clearPictureBoxObject();
+                random = new Random();
+                gameLoop.Enabled = true;
+                startLevel1();
             }
             catch (Exception ex)
             {
@@ -256,16 +309,16 @@ namespace Vidyakali
                     {
                         enemyIdelHealth.Value -= 1;
                     }
-                    if (enemyIdelHealth.Value <= 0)
+                    else if (enemyIdelHealth.Value <= 0)
                     {//level 1 won 
+                        this.Controls.Remove(enemyIdelMovement);
+                        this.Controls.Remove(enemyIdelHealth);
+                        this.enemyIdelMovement.Dispose();
+                        this.enemyIdelHealth.Dispose();
+                        enemyIdelSpeed = 0;
                         nextLevelBox.Visible = true;
                         isLevel1 = false;
-                        this.Controls.Remove(enemyIdelHealth);
-                        this.Controls.Remove(enemyIdelMovement);
-                        if (boxOpeningLevel == 1)
-                        {
-                            boxOpeningLevel = 2;
-                        }
+                        boxOpeningLevel = 2;
                     }
                 }
             }
@@ -431,8 +484,8 @@ namespace Vidyakali
                 enemyRunlHealth.Value = 100;
                 levelNumberStatus = 2;
                 playerSpeed = 10;
-                enemyIdelSpeed = 1;
-                enemyRunSpeed = 3;
+                enemyIdelSpeed = 3;
+                enemyRunSpeed = 5;
                 pgbarPlayerLife.Value = 100;
                 enemyIdelHealth.Value = 100;
                 enemyIdelMovement.Visible = true;
@@ -451,9 +504,9 @@ namespace Vidyakali
             {
                 energyTime++;
                 fixedEnegyTime = random.Next(0, 150);
-                if (20 == energyTime)
+                if (40 == energyTime)
                 {
-                    if (pgbarPlayerLife.Value <= random.Next(0, 80))
+                    if (pgbarPlayerLife.Value <= random.Next(0, 90))
                     {
                         createEnergyPoint();
                     }
@@ -492,9 +545,9 @@ namespace Vidyakali
                     if (energy.Bounds.IntersectsWith(playerMovement.Bounds))
                     {
                         energy.Visible = false;
-                        if (pgbarPlayerLife.Value < 80)
+                        if (pgbarPlayerLife.Value <= 80)
                         {
-                            pgbarPlayerLife.Value += 17;
+                            pgbarPlayerLife.Value += 20;
                         }
                     }
                 }
@@ -539,6 +592,7 @@ namespace Vidyakali
                     {//level 2 idel enemy remove  
                         this.Controls.Remove(enemyIdelHealth);
                         this.Controls.Remove(enemyIdelMovement);
+                        enemyIdelSpeed = 0;
                     }
                 }
             }
@@ -562,6 +616,7 @@ namespace Vidyakali
                     {//level 2 run enemy remove 
                         this.Controls.Remove(enemyRunMovement);
                         this.Controls.Remove(enemyRunlHealth);
+                        enemyRunSpeed = 0;
                     }
                 }
             }
@@ -659,6 +714,7 @@ namespace Vidyakali
                 enemeyIdelListSpeed = 3;
                 createEnemy();
                 this.BackColor = Color.Silver;
+
             }
             catch (Exception ex)
             {
@@ -1315,7 +1371,7 @@ namespace Vidyakali
 
         #region Next Level 
 
-        private void nexLevel()
+        private void nexLevel3()
         {
             try
             {
@@ -1325,8 +1381,18 @@ namespace Vidyakali
                     boxOpeningLevel = 3;
                     isLevel2 = false;
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void winningCodition()
+        {
+            try
+            {
                 if (countDiedEnemy == 10)
-                {
+                {//level 3 won 
                     nextLevelBox.Visible = true;
                     boxOpeningLevel = 4;
                     isLevel3 = false;
@@ -1345,7 +1411,7 @@ namespace Vidyakali
                 {
                     if (pgbarPlayerLife.Value > 0)
                     {
-                        pgbarPlayerLife.Value -= 33;
+                        pgbarPlayerLife.Value -= 20;
                     }
                     playerHealth.Value = 100;
                 }

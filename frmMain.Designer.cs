@@ -231,6 +231,7 @@
             this.pictureBox193 = new System.Windows.Forms.PictureBox();
             this.pictureBox194 = new System.Windows.Forms.PictureBox();
             this.pictureBox195 = new System.Windows.Forms.PictureBox();
+            this.lblcheck = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -2477,12 +2478,22 @@
             this.pictureBox195.TabIndex = 10;
             this.pictureBox195.TabStop = false;
             // 
+            // lblcheck
+            // 
+            this.lblcheck.AutoSize = true;
+            this.lblcheck.Location = new System.Drawing.Point(648, 76);
+            this.lblcheck.Name = "lblcheck";
+            this.lblcheck.Size = new System.Drawing.Size(51, 20);
+            this.lblcheck.TabIndex = 11;
+            this.lblcheck.Text = "label1";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.ClientSize = new System.Drawing.Size(801, 494);
+            this.Controls.Add(this.lblcheck);
             this.Controls.Add(this.pictureBox195);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.pictureBox3);
@@ -3094,6 +3105,7 @@
         private System.Windows.Forms.PictureBox pictureBox193;
         private System.Windows.Forms.PictureBox pictureBox194;
         private System.Windows.Forms.PictureBox pictureBox195;
+        private System.Windows.Forms.Label lblcheck;
     }
 }
 
